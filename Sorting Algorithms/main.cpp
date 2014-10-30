@@ -14,7 +14,10 @@ int main(int argc, const char * argv[])
     vector<int> x = {3, 1, 5, 2, 4};
     
     // run insertion sort
-    s.insertionSort(x);
+//    s.insertionSort(x);
+    
+    // run selection sort
+    s.selectionSort(x);
     
     return 0;
 }

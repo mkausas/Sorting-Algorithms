@@ -10,8 +10,9 @@
 
 /**
  * Insertion Sort
- * O(n^2) runtime
+ * WORST CASE O(n^2) time complexity
  *
+ * -- Optimal at 8-20 elements --
  * This sorting method compares to values adjacent in a list
  * and compares the values. If the value with the larger index 
  * is smaller then the values will be switched within the list. 
@@ -21,13 +22,13 @@
  * loop has finished iterating the list. 
  */
 void Sorter::insertionSort(vector<int> vec) {
-    // sample vector to sort [ 3,1,5,2,4 ]
+    printf("-- Insertion Sort --\n");
     printf("Before Sorting: ");
     printVector(vec);
     
     int temp1; // first val to compare
     int temp2; // val to compare to temp1
-    int temp3; // temp variable used to switch temp1 and temp2 in vector
+    int swap; // temp variable used to switch temp1 and temp2 in vector
     
     // iterate through the vector and grab initial values to compare
     for (int i = 0; i < vec.size() - 1; i++) {
@@ -37,12 +38,14 @@ void Sorter::insertionSort(vector<int> vec) {
             temp2 = vec[j];
             if (temp1 > temp2) { // temp1 is greater, should be after temp2, switch
                 printf("%d > %d switching positions\n", temp1, temp2);
-                temp3 = temp1;
+                swap = temp1;
                 vec[i] = temp2;
-                vec[j] = temp3;
+                vec[j] = swap;
                 if (i > 0)
                     i--;
-            } else { // temp2 is greater and in the correct place, move on
+            }
+            
+            else { // temp2 is greater and in the correct place, move on
                 printf("%d < %d moving on\n", temp1, temp2);
                 break;
             }
@@ -52,6 +55,50 @@ void Sorter::insertionSort(vector<int> vec) {
     printf("After Sorting: ");
     printVector(vec);
 }
+
+
+/**
+ * Selection Sort
+ * WORST CASE O(n^2) time complexity
+ *
+ * -- Optimal at 10-20 elements  --
+ * This sorting method iterates through the entire list to find 
+ * the smalles value. It then switches this values with the list's
+ * 0 index value. Repeat this process until the outerloop finishes
+ * iterating through the list.
+ */
+void Sorter::selectionSort(vector<int> vec) {
+    printf("-- Selection Sort --\n");
+    printf("Before Sorting: ");
+    printVector(vec);
+    
+    int swap;
+    int temp;
+    int minVal;
+    int minIndex;
+
+    for (int i = 0; i < vec.size() - 1; i++) {
+        temp = vec[i];
+        minVal = temp;
+        minIndex = i;
+        for (int j = i; j < vec.size(); j++) {
+            if (vec[j] < minVal) {
+                minVal = vec[j];
+                minIndex = j;
+            }
+        }
+        
+        swap = temp;
+        vec[i] = minVal;
+        vec[minIndex] = swap;
+        printf("swapped %d and %d\n", minVal, swap);
+    }
+    
+    printf("After Sorting: ");
+    printVector(vec);
+}
+
+
 
 /**
  * Prints a vector in a pretty output format, for example:
@@ -65,7 +112,7 @@ void Sorter::printVector(vector<int> vec) {
         
         printf("%d", vec[i]);
         if (i != vec.size() - 1)
-            printf(",");
+            printf(", ");
         else
             printf(" ]\n");
     }
