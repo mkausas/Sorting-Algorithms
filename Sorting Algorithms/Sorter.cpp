@@ -9,7 +9,16 @@
 #include "Sorter.h"
 
 /**
- * 
+ * Insertion Sort
+ * O(n^2) runtime
+ *
+ * This sorting method compares to values adjacent in a list
+ * and compares the values. If the value with the larger index 
+ * is smaller then the values will be switched within the list. 
+ * The smaller value will then compare itself to the next index 
+ * value beneath it and will continue to switch until it finds
+ * a value lower then its own. This process continues till the 
+ * loop has finished iterating the list. 
  */
 void Sorter::insertionSort(vector<int> vec) {
     // sample vector to sort [ 3,1,5,2,4 ]
@@ -44,6 +53,11 @@ void Sorter::insertionSort(vector<int> vec) {
     printVector(vec);
 }
 
+/**
+ * Prints a vector in a pretty output format, for example:
+ * A vector that contains 1, 2, 3, 4, 5 will print as
+ * [ 1, 2, 3, 4, 5 ]
+ */
 void Sorter::printVector(vector<int> vec) {
     for (int i = 0; i < vec.size(); i++) {
         if (i == 0)

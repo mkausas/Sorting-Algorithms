@@ -12,6 +12,9 @@ int main(int argc, const char * argv[])
 {
     Sorter s;
     vector<int> x = {3, 1, 5, 2, 4};
+    
+    // run insertion sort
     s.insertionSort(x);
+    
     return 0;
 }
