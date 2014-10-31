@@ -17,7 +17,12 @@ int main(int argc, const char * argv[])
 //    s.insertionSort(x);
     
     // run selection sort
-    s.selectionSort(x);
+//    s.selectionSort(x);
+    
+    
+    s.bubbleSort(x);
+    
+    
     
     return 0;
 }

@@ -98,6 +98,36 @@ void Sorter::selectionSort(vector<int> vec) {
     printVector(vec);
 }
 
+/**
+ * Selection Sort
+ * WORST CASE O(n^2) time complexity
+ *
+ * This sorting method iterates through the entire list in adjacent
+ * pairs. With each inner loop iteration the two values will be 
+ * compared and switched if out of place. This process is repeated 
+ * until sorting is complete.t
+ */
+void Sorter::bubbleSort(vector<int> vec) {
+    printf("-- Bubble Sort --\n");
+    printf("Before Sorting: ");
+    printVector(vec);
+    
+    int swap;
+    
+    for (int i = 0; i < vec.size(); i++) {
+        for (int j = i; j < vec.size() - 1; j++) {
+            if (vec[j] > vec[j+1]) {
+                swap = vec[j];
+                vec[j] = vec[j+1];
+                vec[j + 1] = swap;
+            }
+        }
+    }
+    
+    printf("After Sorting: ");
+    printVector(vec);
+}
+
 
 
 /**
