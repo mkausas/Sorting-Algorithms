@@ -7,8 +7,6 @@
 //
 
 #include "Sorter.h"
-#include<iostream>
-using namespace std;
 
 /**
  * Insertion Sort
@@ -71,25 +69,24 @@ void Sorter::selectionSort(vector<int> vec) {
     printVector(vec);
     
     int swap;
-    int temp;
-    int minVal;
     int minIndex;
 
+    // iterate through the entire list
     for (int i = 0; i < vec.size() - 1; i++) {
-        temp = vec[i];
-        minVal = temp;
         minIndex = i;
+        // iterate through the list after i
         for (int j = i; j < vec.size(); j++) {
-            if (vec[j] < minVal) {
-                minVal = vec[j];
+            if (vec[j] < vec[minIndex]) { // new min value found
                 minIndex = j;
             }
         }
         
-        swap = temp;
-        vec[i] = minVal;
-        vec[minIndex] = swap;
-        printf("swapped %d and %d\n", minVal, swap);
+        // swap the i value with the smallest value found after i-1
+        swap = vec[minIndex];
+        vec[minIndex] = vec[i];
+        vec[i] = swap;
+    
+        printf("swapped %d and %d\n", vec[i], swap);
     }
     
     printf("After Sorting: ");
@@ -112,9 +109,11 @@ void Sorter::bubbleSort(vector<int> vec) {
     
     int swap;
     
+    // iterate through the entire list
     for (int i = 0; i < vec.size(); i++) {
+        // iterate through adjacents list pairs
         for (int j = i; j < vec.size() - 1; j++) {
-            if (vec[j] > vec[j+1]) {
+            if (vec[j] > vec[j+1]) { // adjacent values need to be switched
                 swap = vec[j];
                 vec[j] = vec[j+1];
                 vec[j + 1] = swap;
@@ -146,9 +145,10 @@ void Sorter::shellSort(vector<int> vec) {
     printf("Before Sorting: ");
     printVector(vec);
     
-    // optimal gaps according to wikepedia
-//    int gaps[] = { 1, 4, 10, 23, 57, 132, 301, 701 };
-    
+    /* --
+    optimal gaps according to wikepedia
+    int gaps[] = { 1, 4, 10, 23, 57, 132, 301, 701 };
+    -- */
     
     int gap = (int) ((5.0 / 12) * vec.size());
     int swap;

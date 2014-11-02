@@ -18,13 +18,13 @@ int main(int argc, const char * argv[])
 //    s.insertionSort(x);
     
     // run selection sort
-//    s.selectionSort(x);
+    s.selectionSort(x);
     
     // run bubble sort
 //    s.bubbleSort(x);
     
     // run shell sort
-    s.shellSort(x);
+//    s.shellSort(x);
     
     return 0;
 }
