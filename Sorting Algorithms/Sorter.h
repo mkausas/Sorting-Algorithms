@@ -19,6 +19,7 @@ public:
     void insertionSort(vector<int> vec);
     void selectionSort(vector<int> vec);
     void bubbleSort(vector<int> vec);
+    void shellSort(vector<int> vec);
     void printVector(vector<int> vec);
 };
 

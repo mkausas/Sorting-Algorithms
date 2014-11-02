@@ -7,6 +7,8 @@
 //
 
 #include "Sorter.h"
+#include<iostream>
+using namespace std;
 
 /**
  * Insertion Sort
@@ -26,27 +28,23 @@ void Sorter::insertionSort(vector<int> vec) {
     printf("Before Sorting: ");
     printVector(vec);
     
-    int temp1; // first val to compare
-    int temp2; // val to compare to temp1
     int swap; // temp variable used to switch temp1 and temp2 in vector
     
     // iterate through the vector and grab initial values to compare
     for (int i = 0; i < vec.size() - 1; i++) {
         // loop to work backwards from i + 1 if temp2 is smaller then temp1 and more
         for (int j = i + 1; j > i; j--) {
-            temp1 = vec[i];
-            temp2 = vec[j];
-            if (temp1 > temp2) { // temp1 is greater, should be after temp2, switch
-                printf("%d > %d switching positions\n", temp1, temp2);
-                swap = temp1;
-                vec[i] = temp2;
+            if (vec[i] > vec[j]) { // temp1 is greater, should be after temp2, switch
+                printf("%d > %d switching positions\n", vec[i], vec[j]);
+                swap = vec[i];
+                vec[i] = vec[j];
                 vec[j] = swap;
                 if (i > 0)
                     i--;
             }
             
             else { // temp2 is greater and in the correct place, move on
-                printf("%d < %d moving on\n", temp1, temp2);
+                printf("%d < %d moving on\n", vec[i], vec[j]);
                 break;
             }
         }
@@ -105,7 +103,7 @@ void Sorter::selectionSort(vector<int> vec) {
  * This sorting method iterates through the entire list in adjacent
  * pairs. With each inner loop iteration the two values will be 
  * compared and switched if out of place. This process is repeated 
- * until sorting is complete.t
+ * until sorting is complete.
  */
 void Sorter::bubbleSort(vector<int> vec) {
     printf("-- Bubble Sort --\n");
@@ -127,6 +125,66 @@ void Sorter::bubbleSort(vector<int> vec) {
     printf("After Sorting: ");
     printVector(vec);
 }
+
+/**
+ * Shell Sort Sort
+ * WORST CASE O(n^2) time complexity
+ *
+ * This sorting method iterates subarrays of the inputted vector.
+ * It performs insertion sorts on the subarrays and decrements 
+ * the number of number of subarrays it sorts through in each 
+ * iteration. 
+ * 
+ * For example in an array of 12 objects one might start out at
+ * 5 subarrays and work down from there:
+ * First Pass: (a1, a6, a11), (a2, a7, a12), (a3, a8), (a4, a9), (a5, a10)
+ * Second Pass: (a1, a4, a7, a10), (a2, a5, a8, a11), (a3, a6, a9, a12)
+ * Third Pass: (a1, ..., a12)
+ */
+void Sorter::shellSort(vector<int> vec) {
+    printf("-- Shell Sort --\n");
+    printf("Before Sorting: ");
+    printVector(vec);
+    
+    // optimal gaps according to wikepedia
+//    int gaps[] = { 1, 4, 10, 23, 57, 132, 301, 701 };
+    
+    
+    int gap = (int) ((5.0 / 12) * vec.size());
+    int swap;
+    
+    // iteratate through all gap sizes
+    for (int g = gap; g > 0; g--) {
+        printf("g = %d\n", g);
+
+        // iterate between subarrays
+        for (int i = 0; i < gap; i++) {
+            // iterate through the subarrays themselves
+            for (int j = i; j < vec.size() - gap; j += gap) {
+                // loop to work backwards from j if j - gap is smaller then j and more
+                for (int k = j + gap; k >= gap; k -= gap) {
+                    if (vec[k] < vec[k - gap]) { // temp1 is greater, should be after temp2, switch
+                        printf("%d < %d switching positions\n", vec[k], vec[k - gap]);
+                        swap = vec[k];
+                        vec[k] = vec[k - gap];
+                        vec[k - gap] = swap;
+                    }
+                    
+                    else { // values are in the right position, do not continue checking lower indexes 
+                        printf("%d > %d moving on\n", vec[k], vec[k - gap]);
+                        break;
+                    }
+                }
+            }
+        }
+        // decrement gap by 2 as a default; for optimization find the best decremented values on wikepedia
+        gap -= 2;
+    }
+    
+    printf("After Sorting: ");
+    printVector(vec);
+}
+
 
 
 
